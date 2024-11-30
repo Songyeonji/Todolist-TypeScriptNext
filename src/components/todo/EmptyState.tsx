@@ -14,7 +14,7 @@ export function EmptyState({ type }: { type: 'todo' | 'done' }) {
             className="hidden sm:block sm-6"  // 여백 조정
           />
           <Image
-            src="/assets/img/empty/Type=Todo, Size=Small.png"
+            src="/assets/img/empty/Type=todo, Size=Small.png"
             alt="할 일 없음"
             width={120}
             height={120}
