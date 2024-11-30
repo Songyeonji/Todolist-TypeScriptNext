@@ -3,7 +3,7 @@
 할 일 관리를 위한 웹 애플리케이션(https://todolist-type-script-next.vercel.app/)
 
 📌 프로젝트 소개  
-Next.js 의 App Router를 활용한 모던한 Todo List 애플리케이션입니다. 사용자 친화적인 UI/UX와 반응형 디자인을 통해 효율적인 할 일 관리 경험을 제공합니다.
+Next.js 15 의 App Router를 활용한 모던한 Todo List 애플리케이션입니다. 사용자 친화적인 UI/UX와 반응형 디자인을 통해 효율적인 할 일 관리 경험을 제공합니다.
 
 ## 🌟 주요 기능
 - ✅ Todo 항목 CRUD 기능
@@ -30,7 +30,7 @@ Next.js 의 App Router를 활용한 모던한 Todo List 애플리케이션입니
 
 ## 🛠️ 기술 스택
 **프레임워크 & 라이브러리**
-- Next.js 
+- Next.js 15
 - TypeScript
 - Tailwind CSS
 - Axios
