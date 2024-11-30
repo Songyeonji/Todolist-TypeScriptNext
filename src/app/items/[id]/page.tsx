@@ -1,10 +1,6 @@
 import { notFound } from 'next/navigation';
 import { ItemDetail } from '../../../components/todo/ItemDetail';
 
-interface ItemDetailPageProps {
-  params: { id: string }
-}
-
 export default async function ItemDetailPage({ params }: { params: { id: string } }) {
   // params를 await로 비동기 처리
   const resolvedParams = await params;
