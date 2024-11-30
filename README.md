@@ -1,6 +1,6 @@
 # Do it; Todo List
 
-할 일 관리를 위한 웹 애플리케이션
+할 일 관리를 위한 웹 애플리케이션(https://todolist-type-script-next.vercel.app/)
 
 📌 프로젝트 소개  
 Next.js 의 App Router를 활용한 모던한 Todo List 애플리케이션입니다. 사용자 친화적인 UI/UX와 반응형 디자인을 통해 효율적인 할 일 관리 경험을 제공합니다.
