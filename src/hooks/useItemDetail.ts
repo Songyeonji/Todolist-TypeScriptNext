@@ -8,23 +8,23 @@ export function useItemDetail(id: number) {
   const [error, setError] = useState<string | null>(null);
 
   const fetchItem = useCallback(async () => {
-    if (!id) return;  // id 유효성 검사 추가
-
+    if (!id) return;
+  
     try {
       setLoading(true);
-      setError(null);  // 에러 상태 초기화
+      setError(null);
       const response = await itemApi.getItemById(id);
       
-      // 응답 유효성 검사
-      if (!response || !response.id) {
-        throw new Error('유효하지 않은 응답입니다.');
+      // response 자체가 Item 타입이므로 타입 에러 없음
+      if (response) {
+        setItem(response);
+        console.log('Fetched item:', response);
+      } else {
+        throw new Error('항목을 찾을 수 없습니다.');
       }
-
-      console.log('Fetched item:', response); // 디버깅용
-      setItem(response);
     } catch (err) {
       console.error('Fetch error:', err);
-      setItem(null); // 아이템 상태 초기화
+      setItem(null);
       setError(err instanceof Error ? err.message : '항목을 불러오는데 실패했습니다.');
     } finally {
       setLoading(false);

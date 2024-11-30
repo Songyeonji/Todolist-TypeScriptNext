@@ -17,11 +17,10 @@ export const itemApi = {
     },
 
     // GET /{tenantId}/items/{id} - 항목 상세 조회
-    getItemById: async (id: number) => {
-        const response = await api.get<ApiResponse<Item>>(`/${TENANT_ID}/items/${id}`);
-        return response.data;
-    },
-
+    getItemById: async (id: number): Promise<Item> => {
+        const response = await api.get<Item>(`/${TENANT_ID}/items/${id}`);
+        return response.data;  // 직접 Item 타입 반환
+      },
     // POST /{tenantId}/items - 항목 등록
     createItem: async (data: { name: string; memo?: string }) => {
         const response = await api.post<Item>(`/${TENANT_ID}/items`, data);
