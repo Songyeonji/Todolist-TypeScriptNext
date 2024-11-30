@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Item } from '../types/item';
 import { itemApi } from '../lib/api';
 
@@ -7,19 +7,29 @@ export function useItemDetail(id: number) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchItem = async () => {
+  const fetchItem = useCallback(async () => {
+    if (!id) return;  // id 유효성 검사 추가
+
     try {
       setLoading(true);
+      setError(null);  // 에러 상태 초기화
       const response = await itemApi.getItemById(id);
-      // response.data로 Item 객체에 접근
-      setItem(response.data);
-    } catch (error) {
-      setError('항목을 불러오는데 실패했습니다.');
-      console.error(error);
+      
+      // 응답 유효성 검사
+      if (!response || !response.id) {
+        throw new Error('유효하지 않은 응답입니다.');
+      }
+
+      console.log('Fetched item:', response); // 디버깅용
+      setItem(response);
+    } catch (err) {
+      console.error('Fetch error:', err);
+      setItem(null); // 아이템 상태 초기화
+      setError(err instanceof Error ? err.message : '항목을 불러오는데 실패했습니다.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
   const updateItem = async (data: { name?: string; memo?: string; isCompleted?: boolean }) => {
     try {
