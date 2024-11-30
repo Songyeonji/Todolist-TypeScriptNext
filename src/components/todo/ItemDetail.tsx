@@ -37,8 +37,12 @@ export function ItemDetail({ id }: ItemDetailProps) {
     try {
       await updateItem({ isCompleted: !isCompleted });
       setIsCompleted(!isCompleted);
-    } catch (error) {
-      alert('상태 변경에 실패했습니다.');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error 
+        ? err.message 
+        : '상태 변경에 실패했습니다.';
+      console.error('Toggle error:', err);
+      alert(errorMessage);
     }
   };
 
@@ -46,8 +50,12 @@ export function ItemDetail({ id }: ItemDetailProps) {
     try {
       await updateItem({ name, memo });
       router.push('/');
-    } catch (error) {
-      alert('수정에 실패했습니다.');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error 
+        ? err.message 
+        : '수정에 실패했습니다.';
+      console.error('Save error:', err);
+      alert(errorMessage);
     }
   };
 
@@ -88,11 +96,14 @@ export function ItemDetail({ id }: ItemDetailProps) {
       await updateItem({ name: newTitle });
       setName(newTitle);
       setIsEditingTitle(false);
-    } catch (error) {
-      alert('제목 수정에 실패했습니다.');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error 
+        ? err.message 
+        : '제목 수정에 실패했습니다.';
+      console.error('Title update error:', err);
+      alert(errorMessage);
     }
   };
-
 
   return (
     <div className="max-w-7xl mx-auto">

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { useItems } from '../../hooks/useItems';
 import { ItemListItem } from './ItemListItem';
@@ -19,24 +19,30 @@ export function ItemList() {
   // 아이템 추가 핸들러 메모이제이션
   const handleAddItem = useCallback(async () => {
     if (!newItemName.trim()) return;
-    
+
     try {
       await createItem(newItemName.trim());
       setNewItemName('');
-    } catch (error) {
-      alert('항목 추가에 실패했습니다.');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error
+        ? err.message
+        : '항목 추가에 실패했습니다.';
+      console.error('Add item error:', err);
+      alert(errorMessage);
     }
   }, [newItemName, createItem]);
-
   // 토글 핸들러 메모이제이션
   const handleToggle = useCallback(async (id: number, isCompleted: boolean) => {
     try {
       await updateItem(id, { isCompleted: !isCompleted });
-    } catch (error) {
-      alert('상태 변경에 실패했습니다.');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error
+        ? err.message
+        : '상태 변경에 실패했습니다.';
+      console.error('Toggle error:', err);
+      alert(errorMessage);
     }
   }, [updateItem]);
-
   // 필터링된 아이템 메모이제이션
   const { activeItems, completedItems } = useMemo(() => {
     if (!items) return { activeItems: [], completedItems: [] };

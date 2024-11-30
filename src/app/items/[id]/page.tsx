@@ -1,16 +1,37 @@
+// src/app/items/[id]/page.tsx
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ItemDetail } from '../../../components/todo/ItemDetail';
 
-export default async function ItemDetailPage({ params }: { params: { id: string } }) {
-  // params를 await로 비동기 처리
+// Props 타입 수정 - searchParams도 Promise로 정의
+type Props = {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+// generateMetadata에서 모든 Promise 처리
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const resolvedParams = await params;
-  console.log("Resolved Params:", resolvedParams);
+  await searchParams; // searchParams도 await 처리
+  return {
+    title: `Item ${resolvedParams.id}`,
+  };
+}
 
-  const id = Number(resolvedParams.id); // resolvedParams를 사용
+// 페이지 컴포넌트에서도 모든 Promise 처리
+export default async function ItemDetailPage({ params, searchParams }: Props) {
+  try {
+    const resolvedParams = await params;
+    await searchParams; // searchParams도 await 처리
+    const id = Number(resolvedParams.id);
 
-  if (isNaN(id)) {
-      console.error("Invalid ID:", resolvedParams.id);
+    if (isNaN(id)) {
       return notFound();
+    }
+
+    return <ItemDetail id={id} />;
+  } catch (error) {
+    console.error('Error:', error);
+    return notFound();
   }
-  return <ItemDetail id={id} />;
 }

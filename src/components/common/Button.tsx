@@ -16,7 +16,6 @@ interface ButtonProps {
     type = 'button',
     disabled = false,
     className = '',
-    size = 'large',
     icon,
   }: ButtonProps) {
     

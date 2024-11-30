@@ -11,8 +11,8 @@ export function useItemDetail(id: number) {
     try {
       setLoading(true);
       const response = await itemApi.getItemById(id);
-      // response가 바로 Item 객체
-      setItem(response);
+      // response.data로 Item 객체에 접근
+      setItem(response.data);
     } catch (error) {
       setError('항목을 불러오는데 실패했습니다.');
       console.error(error);
