@@ -1,0 +1,18 @@
+@import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css');
+ /* Tailwind 임포트보다 먼저 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #5534DA;
+  --secondary-color: #F5F5F5;
+  --text-primary: #1A1A1A;
+  --text-secondary: #757575;
+}
+
+body {
+  font-family: 'NanumSquare', sans-serif;  /* 기본 폰트 설정 */
+  color: var(--text-primary);
+  background: #F5F5F5;
+}
