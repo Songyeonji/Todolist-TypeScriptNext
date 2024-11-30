@@ -1,6 +1,6 @@
 // src/lib/api.ts
 import axios from 'axios';
-import { Item, ApiResponse } from '../types/item';
+import { Item} from '../types/item';
 
 const TENANT_ID = 'songyeonji';
 const BASE_URL = 'https://assignment-todolist-api.vercel.app/api';
