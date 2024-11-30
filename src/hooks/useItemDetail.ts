@@ -32,6 +32,7 @@ export function useItemDetail(id: number) {
       throw error;
     }
   };
+
   const uploadImage = async (file: File) => {
     try {
       // 파일 크기 체크 (5MB)
@@ -56,16 +57,17 @@ export function useItemDetail(id: number) {
       throw new Error(errorMessage);
     }
   };
-// src/hooks/useItemDetail.ts의 deleteItem 부분만 수정
-const deleteItem = async () => {
-  try {
-    const result = await itemApi.deleteItem(id);
-    return result;
-  } catch (error) {
-    console.error('항목 삭제 실패:', error);
-    throw error;
-  }
-};
+
+  const deleteItem = async () => {
+    try {
+      const result = await itemApi.deleteItem(id);
+      setItem(null);
+      return result;
+    } catch (error) {
+      console.error('항목 삭제 실패:', error);
+      throw error;
+    }
+  };
 
   useEffect(() => {
     fetchItem();
